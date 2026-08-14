@@ -1,7 +1,8 @@
+import os
 import requests
 from requests.exceptions import RequestException, Timeout
 
-SERPAPI_KEY = "677c7f95d847727a7ce3ddc74c04e456d173c62d2121ca33bb4ba348307f8ff7"
+SERPAPI_KEY = os.getenv("SERPAPI_KEY")
 
 
 def search_products_serpapi(query):
