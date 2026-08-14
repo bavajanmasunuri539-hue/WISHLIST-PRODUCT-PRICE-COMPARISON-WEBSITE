@@ -802,3 +802,5 @@ Siddharth Institute of Engineering & Technology
 PriceHunt demonstrates how **Django, Python, HTML, CSS, JavaScript, and external product-search APIs** can be integrated to build a practical price comparison platform.
 
 The project provides a foundation for developing a more advanced shopping assistant with **wishlist management, historical price tracking, price-drop notifications, recommendation systems, analytics, and mobile support**.
+
+http://127.0.0.1:8000/about/
