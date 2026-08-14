@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PriceHunt | Compare Electronics Prices</title>
+
+    {% load static %}
+
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            color: white;
+
+            /* 🔹 BACKGROUND IMAGE */
+            background: 
+                linear-gradient(
+                    rgba(30, 60, 114, 0.85),
+                    rgba(42, 82, 152, 0.85)
+                ),
+                url("{% static 'images/hero.jpg' %}") no-repeat center center fixed;
+
+            background-size: cover;
+        }
+
+        /* User bar */
+        #userBar {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 12px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #userBar button {
+            background: #ffcc00;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .header {
+            padding: 20px 40px;
+            font-size: 22px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .container {
+            height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .container h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+
+        .container p {
+            font-size: 18px;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+
+        /* 🔹 SEARCH BOX */
+        .search-box {
+            width: 100%;
+            max-width: 520px;
+            display: flex;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+            outline: none;
+        }
+
+        .search-box button {
+            padding: 16px 22px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            background: #ffcc00;
+            color: #000;
+            font-weight: bold;
+        }
+
+        .search-box button:hover {
+            background: #f5b700;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 15px;
+            font-size: 14px;
+            opacity: 0.85;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- USER BAR -->
+<div id="userBar">
+    <span id="welcomeText">Welcome</span>
+    <button onclick="logout()">Logout</button>
+</div>
+
+<div class="header">🔍 PriceHunt</div>
+
+<div class="container">
+    <h1>Compare Electronics Prices</h1>
+    <p>Search across Amazon, Flipkart, Croma & more</p>
+
+    <form method="GET" action="/search/">
+        <div class="search-box">
+            <input type="text" name="query"
+                   placeholder="Search iPhone, Samsung TV, Sony Headphones..."
+                   required>
+            <button type="submit">Search</button>
+        </div>
+    </form>
+</div>
+
+<div class="footer">
+    © 2025 PriceHunt · Academic Project
+</div>
+
+<script>
+    const user = localStorage.getItem("loggedInUser");
+
+    if (!user) {
+        window.location.href = "/";
+    } else {
+        document.getElementById("welcomeText").innerText =
+            "Welcome, " + user;
+    }
+
+    function logout() {
+        localStorage.removeItem("loggedInUser");
+        window.location.href = "/";
+    }
+</script>
+
+</body>
+</html>

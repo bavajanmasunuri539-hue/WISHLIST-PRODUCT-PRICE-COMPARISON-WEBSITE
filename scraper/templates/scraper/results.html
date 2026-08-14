@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Results | PRICE4YOU</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f4f6f8;
+        }
+
+        .header {
+            background: #1e3c72;
+            color: white;
+            padding: 15px 30px;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .container {
+            width: 85%;
+            margin: 30px auto;
+        }
+
+        .result-title {
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+
+        .card {
+            display: flex;
+            gap: 20px;
+            background: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .card img {
+            width: 120px;
+            height: auto;
+            border-radius: 6px;
+        }
+
+        .card-content h3 {
+            margin: 0 0 8px 0;
+            font-size: 18px;
+        }
+
+        .price {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2a9d8f;
+        }
+
+        .source {
+            font-size: 14px;
+            margin: 5px 0 10px;
+            color: #555;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 16px;
+            background: #1e3c72;
+            color: white;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .pagination {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .pagination a {
+            margin: 0 10px;
+            text-decoration: none;
+            font-weight: bold;
+            color: #1e3c72;
+        }
+
+        .back {
+            display: block;
+            margin-top: 30px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="header">PRICE4YOU</div>
+
+<div class="container">
+    <div class="result-title">
+        Showing results for <strong>"{{ query }}"</strong>
+    </div>
+
+    {% for product in page_obj %}
+        <div class="card">
+            {% if product.image %}
+                <img src="{{ product.image }}" alt="{{ product.title }}">
+            {% endif %}
+
+            <div class="card-content">
+                <h3>{{ product.title }}</h3>
+                <div class="price">{{ product.price }}</div>
+                <div class="source">Sold on {{ product.source }}</div>
+
+                {% if product.url %}
+                    <a href="{{ product.url }}" target="_blank" class="btn">
+                        View on {{ product.source }}
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    {% empty %}
+        <p>No products found.</p>
+    {% endfor %}
+
+    <div class="pagination">
+        {% if page_obj.has_previous %}
+            <a href="?query={{ query }}&page={{ page_obj.previous_page_number }}">⬅ Previous</a>
+        {% endif %}
+
+        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+
+        {% if page_obj.has_next %}
+            <a href="?query={{ query }}&page={{ page_obj.next_page_number }}">Next ➡</a>
+        {% endif %}
+    </div>
+
+    <div class="back">
+        <a href="/">🔙 New Search</a>
+    </div>
+</div>
+
+</body>
+</html>
